@@ -9,9 +9,23 @@ public class PlayerController_Script : Controller_Script
     public KeyCode moveBackwardKey;
     public KeyCode moveClockwiseKey;
     public KeyCode moveCounterClockwiseKey;
+    public KeyCode shootKey;
+
+    public float volumeDistance;
+    
     // Start is called before the first frame update
     public override void Start()
     {
+        //Do we have a gameManager that exists
+        if (GameManager_Script.instance != null)
+        {
+            //And it tracks the player(s)
+            if (GameManager_Script.instance.players != null)
+            {
+                //Register with gameManager
+                GameManager_Script.instance.players.Add(this);
+            }
+        }
         base.Start();
     }
 
@@ -43,6 +57,42 @@ public class PlayerController_Script : Controller_Script
         if (Input.GetKey(moveCounterClockwiseKey))
         {
             pawn.rotateCounterClockwise();
+        }
+
+        if (Input.GetKey(shootKey))
+        {
+            pawn.shoot();
+        }
+
+        //If you push any input then sound
+        if (Input.GetKey(moveForwardKey) || Input.GetKey(moveBackwardKey) ||
+            Input.GetKey(moveClockwiseKey) || Input.GetKey(moveCounterClockwiseKey) ||
+            Input.GetKey(shootKey))
+        {
+            pawn.noiseMaker.volumeDistance = volumeDistance;
+
+            Debug.Log(pawn.noiseMaker.volumeDistance);
+        }
+        //If no input, no sound
+        else
+        {
+            pawn.noiseMaker.volumeDistance = 0;
+
+            Debug.Log(pawn.noiseMaker.volumeDistance);
+        }
+    }
+
+    public void OnDestroy()
+    {
+        //Check there is a gameManager
+        if (GameManager_Script.instance != null)
+        {
+            //Check the gameManager has players
+            if (GameManager_Script.instance.players != null)
+            {
+                //Remove this from players list
+                GameManager_Script.instance.players.Remove(this);
+            }
         }
     }
 }

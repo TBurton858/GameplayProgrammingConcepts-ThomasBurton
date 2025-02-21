@@ -5,14 +5,11 @@ using UnityEngine;
 public abstract class Shooter_Script : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public abstract void Start();
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void Update();
+
+    public abstract void shoot
+        (GameObject bullet, float fireForce, float damage, float lifespan);
 }

@@ -14,6 +14,11 @@ public class GameManager_Script : MonoBehaviour
     //Transform variable
     public Transform playerSpawn;
 
+    //List that holds players
+    public List<PlayerController_Script> players;
+
+    public List<AIController_Script> enemies;
+
     private void Awake()
     {
         //If the instance does not exist
@@ -29,6 +34,9 @@ public class GameManager_Script : MonoBehaviour
             //If there is already an instance, destroy this gameObject
             Destroy(gameObject);
         }
+
+        players = new List<PlayerController_Script>();
+        enemies = new List<AIController_Script>();
     }
 
     // Start is called before the first frame update

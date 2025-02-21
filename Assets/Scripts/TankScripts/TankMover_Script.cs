@@ -12,6 +12,7 @@ public class TankMover_Script : Mover_Script
 
     public override void Start()
     {
+        //Set values to respective components
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
     }

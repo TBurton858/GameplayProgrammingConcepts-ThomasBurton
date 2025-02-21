@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7651130339077114434
+--- !u!1 &5999455590291943935
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6326822509086532943}
-  - component: {fileID: 832660023435021576}
+  - component: {fileID: 1801146632093084316}
+  - component: {fileID: 7712410025760498264}
   m_Layer: 0
-  m_Name: PlayerController
+  m_Name: AIControllerGuard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6326822509086532943
+--- !u!4 &1801146632093084316
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7651130339077114434}
+  m_GameObject: {fileID: 5999455590291943935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,22 +32,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &832660023435021576
+--- !u!114 &7712410025760498264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7651130339077114434}
+  m_GameObject: {fileID: 5999455590291943935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52bf4987aa79fc644b257c2fe7bd0034, type: 3}
+  m_Script: {fileID: 11500000, guid: 20889e0edd10ab7408aae017d1c58a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  moveForwardKey: 119
-  moveBackwardKey: 115
-  moveClockwiseKey: 100
-  moveCounterClockwiseKey: 97
-  shootKey: 323
-  volumeDistance: 10
+  currentState: 0
+  target: {fileID: 0}
+  triggerDistance: 20
+  fleeDistance: 3
+  wayPoints: []
+  stopToWayPoint: 0
+  currentPoint: 0
+  fovAngle: 75
