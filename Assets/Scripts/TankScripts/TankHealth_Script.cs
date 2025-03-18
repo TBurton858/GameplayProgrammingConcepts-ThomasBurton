@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TankHealth_Script : Health_Script
 {
+    public bool respawn;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -14,5 +16,13 @@ public class TankHealth_Script : Health_Script
     public override void Update()
     {
         base.Update();
+    }
+
+    public override void Die(Pawn_Script source)
+    {
+        if (!respawn)
+        {
+            Destroy(gameObject);
+        }
     }
 }

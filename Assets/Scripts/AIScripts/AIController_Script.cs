@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class AIController_Script : Controller_Script
@@ -21,6 +22,8 @@ public class AIController_Script : Controller_Script
 
     public float fovAngle;
 
+    public GameObject[] rooms;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -37,7 +40,29 @@ public class AIController_Script : Controller_Script
             }
         }
 
-        //currentState = aiState.Guard;
+        rooms = GameObject.FindGameObjectsWithTag("Room");
+
+        determinePatrol();
+    }
+
+    public void determinePatrol()
+    {
+        float nearestRoom = 100;
+
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            float distance = Vector3.Distance
+                        (pawn.transform.position, rooms[i].transform.position);
+
+            if (distance <= nearestRoom)
+            {
+                nearestRoom = distance;
+
+                Room roomScript = rooms[i].GetComponent<Room>();
+
+                wayPoints = roomScript.patrolPoints;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -56,17 +81,13 @@ public class AIController_Script : Controller_Script
         {
             //Find player one
             targetPlayerOne();
-
-            Debug.Log("Looking");
         }
 
         //If ishastarget is true
-        if (isHasTarget())
+        if (isHasTarget() && pawn != null)
         {
             //Process inputs
             processInputs();
-
-            Debug.Log("Found");
         }
 
         base.Update();

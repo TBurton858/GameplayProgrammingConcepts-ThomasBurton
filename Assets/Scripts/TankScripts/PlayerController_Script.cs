@@ -35,6 +35,13 @@ public class PlayerController_Script : Controller_Script
         processInputs();
 
         base.Update();
+
+        TankHealth_Script playerHealth = pawn.GetComponent<TankHealth_Script>();
+
+        if (playerHealth.currentHealth <= 0)
+        {
+            playerHealth.currentHealth = playerHealth.maxHealth;
+        }
     }
 
     public override void processInputs()
@@ -71,14 +78,12 @@ public class PlayerController_Script : Controller_Script
         {
             pawn.noiseMaker.volumeDistance = volumeDistance;
 
-            Debug.Log(pawn.noiseMaker.volumeDistance);
+            
         }
         //If no input, no sound
         else
         {
             pawn.noiseMaker.volumeDistance = 0;
-
-            Debug.Log(pawn.noiseMaker.volumeDistance);
         }
     }
 

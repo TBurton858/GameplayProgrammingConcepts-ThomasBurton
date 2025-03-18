@@ -115,6 +115,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c68a82c7554d6494e92ef4fb824740fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2757473409878355733}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c68a82c7554d6494e92ef4fb824740fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7490507597248883085}
   m_SourcePrefab: {fileID: 100100000, guid: c68a82c7554d6494e92ef4fb824740fd, type: 3}
 --- !u!4 &3512160592587010813 stripped
 Transform:
@@ -186,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b52e1cf21a55249aa0d76efb946d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 5
   turnSpeed: 75
   mover: {fileID: 0}
   shooter: {fileID: 0}
@@ -220,8 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b2d06ee8f2b234ea610f4af9a1067e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 3
+  currentHealth: 5
+  maxHealth: 5
+  respawn: 1
 --- !u!114 &6496947623354453894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +252,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeDistance: 0
+--- !u!114 &-7490507597248883085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320750706131101767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11fa29908061db46b48a448e62be16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

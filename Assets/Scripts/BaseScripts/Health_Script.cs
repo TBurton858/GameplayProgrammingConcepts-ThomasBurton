@@ -48,8 +48,8 @@ public abstract class Health_Script : MonoBehaviour
     }
 
     //Call this function when death
-    public void Die(Pawn_Script source)
+    public virtual void Die(Pawn_Script source)
     {
-        Destroy(gameObject);
+        
     }
 }

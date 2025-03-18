@@ -50,7 +50,9 @@ public class TankPawn_Script : Pawn_Script
 
     public override void shoot()
     {
-        if(Time.time >= nextShootTime)
+        secondsPerShot = 1 / fireRate;
+
+        if (Time.time >= nextShootTime)
         {
             shooter.shoot(bullet, fireForce, damage, lifespan);
 
