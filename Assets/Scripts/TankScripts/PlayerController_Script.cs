@@ -12,6 +12,11 @@ public class PlayerController_Script : Controller_Script
     public KeyCode shootKey;
 
     public float volumeDistance;
+
+    public int displayScore;
+    public int displayLives;
+
+    public TempTextUpdate_Script textScript;
     
     // Start is called before the first frame update
     public override void Start()
@@ -27,11 +32,16 @@ public class PlayerController_Script : Controller_Script
             }
         }
         base.Start();
+
+        textScript = pawn.GetComponentInChildren<TempTextUpdate_Script>();
     }
 
     // Update is called once per frame
     public override void Update()
     {
+        textScript.score = displayScore;
+        textScript.lives = displayLives;
+
         processInputs();
 
         base.Update();
@@ -42,6 +52,12 @@ public class PlayerController_Script : Controller_Script
         {
             playerHealth.currentHealth = playerHealth.maxHealth;
         }
+
+        displayScore = base.currentScore;
+
+        displayLives = playerHealth.lives;
+
+        GameManager_Script.instance.scoreOnDeath(displayScore);
     }
 
     public override void processInputs()
@@ -99,5 +115,10 @@ public class PlayerController_Script : Controller_Script
                 GameManager_Script.instance.players.Remove(this);
             }
         }
+    }
+
+    public override void addToScore(int amount)
+    {
+        currentScore += amount;
     }
 }

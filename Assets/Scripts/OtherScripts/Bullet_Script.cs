@@ -7,10 +7,12 @@ public class Bullet_Script : MonoBehaviour
     public float damage;
     public Pawn_Script owner;
 
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,11 @@ public class Bullet_Script : MonoBehaviour
         {
             //Damage
             hitThing.takeDamage(damage, owner);
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
 
         //Destroy bullet

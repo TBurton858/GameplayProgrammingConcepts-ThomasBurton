@@ -7,6 +7,10 @@ public abstract class Controller_Script : MonoBehaviour
     //Reference the pawn with variable
     public Pawn_Script pawn;
 
+    public int lives = 1;
+
+    public int currentScore;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -20,4 +24,6 @@ public abstract class Controller_Script : MonoBehaviour
     }
 
     public abstract void processInputs();
+
+    public abstract void addToScore(int amount);
 }

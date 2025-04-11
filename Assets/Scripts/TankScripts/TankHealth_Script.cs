@@ -6,6 +6,12 @@ public class TankHealth_Script : Health_Script
 {
     public bool respawn;
 
+    public bool destroy = true;
+
+    public int lives;
+
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -16,13 +22,33 @@ public class TankHealth_Script : Health_Script
     public override void Update()
     {
         base.Update();
+
+        updateHealth();
     }
 
     public override void Die(Pawn_Script source)
     {
+        base.Die(source);
+
         if (!respawn)
         {
-            Destroy(gameObject);
+            lives--;
+        }
+
+        if (!respawn && lives <= 0)
+        {
+            if (destroy)
+            {
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            GameManager_Script.instance.respawn(this.gameObject);
+
+            currentHealth = maxHealth;
+
+            updateHealth();
         }
     }
 }

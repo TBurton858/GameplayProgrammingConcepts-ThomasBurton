@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -77,14 +78,20 @@ public class AIController_Script : Controller_Script
         */
 
         //If ishastarget is false
-        if (!isHasTarget())
+        if (target == null)
         {
-            //Find player one
-            targetPlayerOne();
+            targetPlayer();
         }
 
+        /*
+        if (target != null && GameManager_Script.instance.players.Count > 1)
+        {
+            findNearestPlayer();
+        }
+        */
+
         //If ishastarget is true
-        if (isHasTarget() && pawn != null)
+        if (target != null && pawn != null)
         {
             //Process inputs
             processInputs();
@@ -236,14 +243,18 @@ public class AIController_Script : Controller_Script
         currentState = state;
     }
 
-    public void targetPlayerOne()
+    public void targetPlayer()
     {
         //If there is a game instance, there is players, and the amount is greater than 0, do the following
         if (GameManager_Script.instance != null && GameManager_Script.instance.players != null
             && GameManager_Script.instance.players.Count > 0)
         {
+            int choosenTarget = Random.Range(0, GameManager_Script.instance.players.Count);
+
+            Debug.Log(choosenTarget);
+
             //Target is player 1
-            target = GameManager_Script.instance.players[0].pawn.gameObject;
+            target = GameManager_Script.instance.players[choosenTarget].pawn.gameObject;
         }
         /*
         //The better version:
@@ -251,11 +262,25 @@ public class AIController_Script : Controller_Script
         */
     }
 
-    protected bool isHasTarget()
+    /*
+    public void findNearestPlayer()
     {
-        //return value if there is or is not target
-        return target != null;
+        for(int i = 0; i > GameManager_Script.instance.players.Count; i++)
+        {
+            float closestDistance = 1000;
+
+            float distance = Vector3.Distance(pawn.transform.position,
+                GameManager_Script.instance.players[i].pawn.transform.position);
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+
+                target = GameManager_Script.instance.players[i].pawn.gameObject;
+            }
+        }
     }
+    */
 
     public bool canHear(GameObject target)
     {
@@ -316,5 +341,10 @@ public class AIController_Script : Controller_Script
 
         //If no value is pulled above, then it is false
         return false;
+    }
+
+    public override void addToScore(int amount)
+    {
+        currentScore += amount;
     }
 }

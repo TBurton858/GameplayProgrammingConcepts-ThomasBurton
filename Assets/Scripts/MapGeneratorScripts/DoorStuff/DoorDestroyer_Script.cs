@@ -16,6 +16,8 @@ public class DoorDestroyer_Script : MonoBehaviour
 
     public void destroyDoors()
     {
+        doors = GameObject.FindGameObjectsWithTag("Door");
+
         for (int i = 0; i < doors.Length; i++)
         {
             for (int j = 0; j < doors.Length; j++)

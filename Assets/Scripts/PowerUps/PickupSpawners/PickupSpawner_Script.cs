@@ -10,12 +10,20 @@ public class PickupSpawner_Script : MonoBehaviour
     private Transform tf;
 
     private GameObject spawnedPickup;
+
+    private bool soundPlayed;
+
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         tf = GetComponent<Transform>();
 
         nextSpawnTime = Time.time + spawnDelay;
+
+        audioSource = GetComponent<AudioSource>();
+
+        soundPlayed = true;
     }
 
     // Update is called once per frame
@@ -23,6 +31,13 @@ public class PickupSpawner_Script : MonoBehaviour
     {
         if (spawnedPickup == null)
         {
+            if (!soundPlayed)
+            {
+                audioSource.Play();
+
+                soundPlayed = true;
+            }
+
             int powerupToSpawn = Random.Range(0, pickupPrefabs.Length);
 
             if (Time.time > nextSpawnTime)
@@ -31,6 +46,8 @@ public class PickupSpawner_Script : MonoBehaviour
                     tf.position, tf.rotation);
 
                 nextSpawnTime = Time.time + spawnDelay;
+
+                soundPlayed = false;
             }
         }
         else

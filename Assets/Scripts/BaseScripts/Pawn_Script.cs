@@ -20,6 +20,8 @@ public abstract class Pawn_Script : MonoBehaviour
     public float lifespan;
     public float fireRate;
 
+    public Controller_Script controller;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
